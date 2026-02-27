@@ -1,0 +1,46 @@
+const { createArticoloSchema } = require('../validators/articoli.validator');
+
+exports.createArticolo = async (req, res, next) => {
+  try {
+    const { error } = createArticoloSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({
+        message: error.details[0].message
+      });
+    }
+
+    const articolo = await service.createArticolo(req.body);
+    res.status(201).json(articolo);
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getAllArticoli = async (req, res, next) => {
+  try {
+    const articoli = await service.getAllArticoli();
+    res.json(articoli);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getArticoloById = async (req, res, next) => {
+  try {
+    const articolo = await service.getArticoloById(req.params.id);
+    res.json(articolo);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateArticolo = async (req, res, next) => {
+  try {
+    const articolo = await service.updateArticolo(req.params.id, req.body);
+    res.json(articolo);
+  } catch (err) {
+    next(err);
+  }
+};
