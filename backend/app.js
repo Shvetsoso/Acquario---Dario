@@ -12,6 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//  ROUTER DI PROVA:
+app.get('/', (req, res) => {
+  res.send('API Acquario Dario funzionante 🚀');
+});
+
 //  ROUTER
 app.use('/api/articoli', articoliRoutes);
 app.use('/api/clienti', clientiRoutes);
