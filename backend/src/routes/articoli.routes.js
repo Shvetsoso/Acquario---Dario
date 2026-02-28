@@ -3,9 +3,16 @@ const router = express.Router();
 
 const controller = require('../controllers/articoli.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
+const validate = require('../middlewares/validate.middleware');
+const { createArticoloSchema } = require('../validators/articoli.validator');
 
 //  CREATE
-router.post('/', authMiddleware, controller.createArticolo);
+router.post(
+  '/',
+  authMiddleware,
+  validate(createArticoloSchema),
+  controller.createArticolo
+);
 
 //  READ ALL
 router.get('/', controller.getAllArticoli);

@@ -2,14 +2,6 @@ const { createClienteSchema } = require('../validators/clienti.validator');
 
 exports.createCliente = async (req, res, next) => {
   try {
-    const { error } = createClienteSchema.validate(req.body);
-
-    if (error) {
-      return res.status(400).json({
-        message: error.details[0].message
-      });
-    }
-
     const cliente = await service.createCliente(req.body);
     res.status(201).json({
       success: true,
@@ -26,7 +18,7 @@ exports.getAllClienti = async (req, res, next) => {
     const clienti = await service.getAllClienti();
     res.status(200).json({
       success: true,
-      data: cliente
+      data: clienti
     });
   } catch (err) {
     next(err);

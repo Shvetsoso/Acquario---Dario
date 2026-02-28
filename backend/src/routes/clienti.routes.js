@@ -3,9 +3,16 @@ const router = express.Router();
 
 const controller = require('../controllers/clienti.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
+const validate = require('../middlewares/validate.middleware');
+const { createClienteSchema } = require('../validators/clienti.validator');
 
 //  CREATE
-router.post('/', authMiddleware, controller.createCliente);
+router.post(
+  '/',
+  authMiddleware,
+  validate(createClienteSchema),
+  controller.createCliente
+);
 
 //  READ ALL
 router.get('/', controller.getAllClienti);

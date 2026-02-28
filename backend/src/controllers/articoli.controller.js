@@ -1,15 +1,5 @@
-const { createArticoloSchema } = require('../validators/articoli.validator');
-
 exports.createArticolo = async (req, res, next) => {
   try {
-    const { error } = createArticoloSchema.validate(req.body);
-
-    if (error) {
-      return res.status(400).json({
-        message: error.details[0].message
-      });
-    }
-
     const articolo = await service.createArticolo(req.body);
     res.status(201).json({
       success: true,
@@ -26,7 +16,7 @@ exports.getAllArticoli = async (req, res, next) => {
     const articoli = await service.getAllArticoli();
     res.status(200).json({
       success: true,
-      data: articolo
+      data: articoli
     });
   } catch (err) {
     next(err);

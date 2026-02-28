@@ -4,9 +4,7 @@ module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({
-      message: 'Token mancante'
-    });
+    throw new ApiError(401, 'Token mancante');
   }
 
   const token = authHeader.split(' ')[1];
@@ -18,8 +16,6 @@ module.exports = (req, res, next) => {
 
     next();
   } catch (err) {
-    return res.status(401).json({
-      message: 'Token non valido'
-    });
+    throw new ApiError(401, 'Token non valido');
   }
 };

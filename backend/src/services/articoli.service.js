@@ -11,10 +11,10 @@ exports.getAllArticoli = async () => {
 exports.getArticoloById = async (id) => {
   const articolo = await repository.findById(id);
 
+  const ApiError = require('../utils/ApiError');
+
   if (!articolo) {
-    const error = new Error('Articolo non trovato');
-    error.status = 404;
-    throw error;
+    throw new ApiError(404, 'Articolo non trovato');
   }
   return articolo;
 };

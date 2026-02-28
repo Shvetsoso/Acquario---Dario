@@ -10,3 +10,10 @@ router.post('/login', (req, res) => {
 module.exports = router;
 
 //  PROVVISORIO da rivdere 
+/*
+router.post(
+  '/login',
+  validate(loginSchema),
+  controller.login
+);
+*/

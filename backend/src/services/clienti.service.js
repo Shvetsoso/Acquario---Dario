@@ -11,10 +11,10 @@ exports.getAllClienti = async () => {
 exports.getClienteById = async (id) => {
   const cliente = await repository.findById(id);
 
+  const ApiError = require('../utils/ApiError');
+
   if (!cliente) {
-    const error = new Error('Cliente non trovato');
-    error.status = 404;
-    throw error;
+    throw new ApiError(404, 'Cliente non trovato');
   }
   return cliente;
 };

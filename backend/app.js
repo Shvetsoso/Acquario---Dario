@@ -6,9 +6,11 @@ const clientiRoutes = require('./src/routes/clienti.routes');
 const venditeRoutes = require('./src/routes/vendite.routes');
 const authRoutes = require('./src/routes/auth.routes');
 const errorMiddleware = require('./src/middlewares/error.middleware');
+const morgan = require('morgan');
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 

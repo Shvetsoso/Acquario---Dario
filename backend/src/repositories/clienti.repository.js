@@ -33,7 +33,7 @@ exports.update = async (id, { nome, cognome, telefono, email, data_registrazione
   const result = await pool.query(
     `UPDATE clienti
      SET nome=$1, cognome=$2, telefono=$3, email=$4, data_registrazione=$5, username=$6, indirizzo=$7, password=$8
-     WHERE id=$8
+     WHERE id=$9
      RETURNING *`,
     [nome, cognome, telefono, email, data_registrazione, username, indirizzo, password, id]
   );

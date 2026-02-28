@@ -17,10 +17,8 @@ const createVendita = async (data) => {
         item.id_articolo
       );
 
-      if (!articolo){
-        const error = new Error('Vendita non trovato');
-        error.status = 404;
-        throw error;
+      if (!articolo) {
+        throw new ApiError(404, 'Articolo non trovato');
       }
       if (articolo.quantita_magazzino < item.quantita)
         throw new ApiError(409, 'Quantità insufficiente in magazzino');
