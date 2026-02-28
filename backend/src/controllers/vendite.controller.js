@@ -13,10 +13,13 @@ const createVendita = async (req, res) => {
 
     const vendita = await venditeService.createVendita(req.body);
 
-    res.status(201).json(vendita);
+    res.status(201).json({
+      success: true,
+      data: vendita
+    });
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
 

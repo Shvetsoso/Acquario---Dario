@@ -12,9 +12,10 @@ exports.getClienteById = async (id) => {
   const cliente = await repository.findById(id);
 
   if (!cliente) {
-    throw new Error('Cliente non trovato');
+    const error = new Error('Cliente non trovato');
+    error.status = 404;
+    throw error;
   }
-
   return cliente;
 };
 

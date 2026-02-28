@@ -1,5 +1,6 @@
 const pool = require('../config/db');
 const repo = require('../repositories/vendite.repository');
+const ApiError = require('../utils/ApiError');
 
 const createVendita = async (data) => {
   const client = await pool.connect();
@@ -16,11 +17,13 @@ const createVendita = async (data) => {
         item.id_articolo
       );
 
-      if (!articolo)
-        throw new Error('Articolo non trovato');
-
+      if (!articolo){
+        const error = new Error('Vendita non trovato');
+        error.status = 404;
+        throw error;
+      }
       if (articolo.quantita_magazzino < item.quantita)
-        throw new Error('Quantità insufficiente');
+        throw new ApiError(409, 'Quantità insufficiente in magazzino');
 
       totale += articolo.prezzo * item.quantita;
 

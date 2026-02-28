@@ -12,9 +12,10 @@ exports.getArticoloById = async (id) => {
   const articolo = await repository.findById(id);
 
   if (!articolo) {
-    throw new Error('Articolo non trovato');
+    const error = new Error('Articolo non trovato');
+    error.status = 404;
+    throw error;
   }
-
   return articolo;
 };
 
